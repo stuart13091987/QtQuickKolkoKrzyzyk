@@ -9,12 +9,14 @@ ApplicationWindow {
     property alias mouseArea: mouseArea
     title: qsTr("Hello World")
 
+
     SwipeView {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
         Page1 {
+            //var playerTurn = 0
 
             Grid {
                 id: grid
@@ -35,6 +37,7 @@ ApplicationWindow {
                         id: mouseArea
                         width: 100
                         height: 100
+                        onClicked: rectangle.color="blue"
                     }
                 }
 
@@ -48,7 +51,12 @@ ApplicationWindow {
                         id: mouseArea1
                         width: 100
                         height: 100
-                        onClicked: rectangle1.color="blue"
+                        onClicked:
+                        {
+                            //playerTurn = playerTurn  + 1
+                            //console.log("Turn", playerTurn)
+                            rectangle1.color="blue"
+                        }
                     }
                 }
 
@@ -62,7 +70,7 @@ ApplicationWindow {
                         id: mouseArea2
                         width: 100
                         height: 100
-                        onClicked: rectangle1.
+                        onClicked: rectangle2.color="blue"
                     }
                 }
 
@@ -78,6 +86,7 @@ ApplicationWindow {
                         id: mouseArea3
                         width: 100
                         height: 100
+                        onClicked: rectangle4.color="blue"
                     }
                 }
 
@@ -91,6 +100,7 @@ ApplicationWindow {
                         id: mouseArea4
                         width: 100
                         height: 100
+                        onClicked: rectangle5.color="blue"
                     }
                 }
 
@@ -104,6 +114,7 @@ ApplicationWindow {
                         id: mouseArea5
                         width: 100
                         height: 100
+                        onClicked: rectangle6.color="blue"
                     }
                 }
 
@@ -117,6 +128,7 @@ ApplicationWindow {
                         id: mouseArea6
                         width: 100
                         height: 100
+                        onClicked: rectangle3.color="blue"
                     }
                 }
 
@@ -130,6 +142,7 @@ ApplicationWindow {
                         id: mouseArea7
                         width: 100
                         height: 100
+                        onClicked: rectangle7.color="blue"
                     }
                 }
 
@@ -143,6 +156,7 @@ ApplicationWindow {
                         id: mouseArea8
                         width: 100
                         height: 100
+                        onClicked: rectangle8.color="blue"
                     }
                 }
 

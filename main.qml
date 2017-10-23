@@ -4,10 +4,10 @@ import QtQuick.Layouts 1.3
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 420
+    height: 520
     property alias mouseArea: mouseArea
-    title: qsTr("Hello World")
+    title: qsTr("KolkoKrzyzyk")
 
 
     SwipeView {
@@ -15,13 +15,21 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        Page1 {
-            //var playerTurn = 0
+
+        Connections {
+            target: manager
+            onSendToQml: {
+                console.log("Received in QML from C++: " + count)
+            }
+        }
+
+        Page {
+            id:page1
 
             Grid {
                 id: grid
-                x: 160
-                y: 109
+                x: 50
+                y: 50
                 width: 300
                 height: 300
                 rows: 3
@@ -32,12 +40,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea
                         width: 100
                         height: 100
-                        onClicked: rectangle.color="blue"
+                        onClicked: manager.receiveFromQml(1);
+                    }
+
+                    Image{
+                        id: image1
+                        width: 90
+                        height: 90
+                        source: "x.png"
                     }
                 }
 
@@ -46,17 +63,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea1
                         width: 100
                         height: 100
-                        onClicked:
-                        {
-                            //playerTurn = playerTurn  + 1
-                            //console.log("Turn", playerTurn)
-                            rectangle1.color="blue"
-                        }
+                        onClicked: manager.receiveFromQml(2);
+                    }
+
+                    Image{
+                        id: image2
+                        width: 90
+                        height: 90
+                        source: "x.png"
                     }
                 }
 
@@ -65,12 +86,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea2
                         width: 100
                         height: 100
-                        onClicked: rectangle2.color="blue"
+                        onClicked: manager.receiveFromQml(3);
+                    }
+
+                    Image{
+                        id: image3
+                        width: 90
+                        height: 90
+                        source: "x.png"
                     }
                 }
 
@@ -81,12 +111,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea3
                         width: 100
                         height: 100
-                        onClicked: rectangle4.color="blue"
+                        onClicked: manager.receiveFromQml(4);
+                    }
+
+                    Image{
+                        id: image4
+                        width: 90
+                        height: 90
+                        source: "circle.jpg"
                     }
                 }
 
@@ -95,12 +134,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea4
                         width: 100
                         height: 100
-                        onClicked: rectangle5.color="blue"
+                        onClicked: manager.receiveFromQml(5);
+                    }
+
+                    Image{
+                        id: image5
+                        width: 90
+                        height: 90
+                        source: "circle.jpg"
                     }
                 }
 
@@ -109,12 +157,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea5
                         width: 100
                         height: 100
-                        onClicked: rectangle6.color="blue"
+                        onClicked: manager.receiveFromQml(6);
+                    }
+
+                    Image{
+                        id: image6
+                        width: 90
+                        height: 90
+                        source: "circle.jpg"
                     }
                 }
 
@@ -123,12 +180,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea6
                         width: 100
                         height: 100
-                        onClicked: rectangle3.color="blue"
+                        onClicked: manager.receiveFromQml(7);
+                    }
+
+                    Image{
+                        id: image7
+                        width: 90
+                        height: 90
+                        source: "o.png"
                     }
                 }
 
@@ -137,12 +203,21 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea7
                         width: 100
                         height: 100
-                        onClicked: rectangle7.color="blue"
+                        onClicked: manager.receiveFromQml(8);
+                    }
+
+                    Image{
+                        id: image8
+                        width: 90
+                        height: 90
+                        source: "o.png"
                     }
                 }
 
@@ -151,53 +226,72 @@ ApplicationWindow {
                     width: 100
                     height: 100
                     color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
 
                     MouseArea {
                         id: mouseArea8
                         width: 100
                         height: 100
-                        onClicked: rectangle8.color="blue"
+                        onClicked: manager.receiveFromQml(9);
+                    }
+
+                    Image{
+                        id: image9
+                        width: 90
+                        height: 90
+                        source: "circle.jpg"
                     }
                 }
 
             }
-
         }
 
         Page {
+
+            id:page2
+
+            Image {
+                id: image10
+                width: 640
+                height: 480
+                source: "bg.jpeg"
+            }
+
             Label {
+                y: 100
                 width: 165
                 height: 61
                 text: qsTr("Hello Milo")
+                color: "white"
+
+
                 anchors.verticalCenterOffset: 56
                 anchors.horizontalCenterOffset: 40
                 anchors.centerIn: parent
             }
 
             Image {
+                x: 100
+                y: 50
                 id: image
-                width: 100
-                height: 100
+                width: 200
+                height: 200
                 source: "52330708_edit.jpg"
             }
         }
 
-        Item {
-        }
     }
 
     footer: TabBar {
         id: tabBar
         currentIndex: swipeView.currentIndex
         TabButton {
-            text: qsTr("First")
+            text: qsTr("TheGame")
         }
         TabButton {
-            text: qsTr("Second")
+            text: qsTr("About")
         }
 
-        TabButton {
-            text: "Tab 2"
-        }
     }
 }

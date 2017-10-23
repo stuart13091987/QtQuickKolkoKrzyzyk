@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "gamemanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -7,9 +9,20 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+
+    QQmlContext* ctx = engine.rootContext();
+
+    GameManager manager;
+
+    //Make my class available in QML.
+    ctx->setContextProperty("manager", &manager);
+
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 
+    manager.sendToQml(43);
+
     return app.exec();
+
 }

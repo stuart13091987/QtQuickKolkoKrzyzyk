@@ -1,13 +1,16 @@
 #include "gamemanager.h"
+#include <QDebug>
 
 GameManager::GameManager(QObject *parent) : QObject(parent)
 {
     //initialize array
-    for(int i = 0; i <SIZE; i++)
+    for(int i = 0; i <SIZE*SIZE; i++)
     {
-        for(j = 0; j<SIZE; j++)
-        {
-            Tab[i][j] = EMPTY;
-        }
+            Tab[i] = EMPTY;
     }
+}
+
+void GameManager::receiveFromQml(int count)
+{
+    qDebug() << "Received in C++ from QML:" << count;
 }

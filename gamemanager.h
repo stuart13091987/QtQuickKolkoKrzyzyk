@@ -23,14 +23,17 @@ class GameManager : public QObject
 public:
     explicit GameManager(QObject *parent = 0);
 
-private:
-    int Tab[SIZE][SIZE];
+    void setTab(int x, int y, int player);
 
+private:
+    int Tab[SIZE*SIZE];
 
 
 signals:
-
+  void sendToQml(int count);
 public slots:
+  void receiveFromQml(int count);
+
 };
 
 #endif // GAMEMANAGER_H

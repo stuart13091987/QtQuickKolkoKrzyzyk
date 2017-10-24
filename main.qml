@@ -16,12 +16,29 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
+
         Connections {
             target: manager
             onSendToQml: {
                 Item.aString = playerStr
                 console.log("Received in QML from C++: " + playerStr)
                 console.log("Manager.playerStr " + manager.playerStr)
+            }
+        }
+
+        Connections {
+            target: manager
+            onSendWinner: {
+                console.log("We got a winner" + manager.winner.toString())
+                whoWon.text = "Player " + manager.winner.toString() + " Won !"
+            }
+        }
+
+        Connections {
+            target: manager
+            onSendPlayer: {
+                //console.log("Player " + manager.player.toString() + "turn")
+                whosturn.text = "Move Player " + manager.player.toString()
             }
         }
 
@@ -273,6 +290,51 @@ ApplicationWindow {
                     }
                 }
 
+            }
+
+            Label{
+                id:whoWon
+                x:50
+                y:400
+                text:"Winner is:"
+            }
+
+            Label{
+                id:whosturn
+                x:50
+                y:420
+                text:"Move player 1"
+            }
+
+
+            Button{
+                id: newGameButton
+                x:200
+                y:400
+                text: "New Game"
+                onClicked:
+                {
+                    image1.source=""
+                    image2.source=""
+                    image3.source=""
+                    image4.source=""
+                    image5.source=""
+                    image6.source=""
+                    image7.source=""
+                    image8.source=""
+                    image9.source=""
+                    rectangle.color="green"
+                    rectangle1.color="green"
+                    rectangle2.color="green"
+                    rectangle3.color="green"
+                    rectangle4.color="green"
+                    rectangle5.color="green"
+                    rectangle6.color="green"
+                    rectangle7.color="green"
+                    rectangle8.color="green"
+                    manager.player = 1
+                    manager.winner = 0
+                }
             }
         }
 

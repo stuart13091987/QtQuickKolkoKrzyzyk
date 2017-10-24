@@ -14,6 +14,7 @@ GameManager::GameManager(QObject *parent) : QObject(parent)
 
     winner = EMPTY;
 
+    //image name for NOUGHT
     playerStr = "o.png";
 }
 
@@ -27,7 +28,7 @@ int GameManager::checkGameStatus(int count)
        (Tab[1]==NOUGHT && Tab[4]==NOUGHT && Tab[7]==NOUGHT) ||
        (Tab[3]==NOUGHT && Tab[5]==NOUGHT && Tab[8]==NOUGHT) ||
        (Tab[0]==NOUGHT && Tab[4]==NOUGHT && Tab[8]==NOUGHT) ||
-       (Tab[6]==NOUGHT && Tab[5]==NOUGHT && Tab[2]==NOUGHT))
+       (Tab[6]==NOUGHT && Tab[4]==NOUGHT && Tab[2]==NOUGHT))
     {
         winner = NOUGHT;
     }
@@ -39,11 +40,10 @@ int GameManager::checkGameStatus(int count)
        (Tab[1]==CROSS && Tab[4]==CROSS && Tab[7]==CROSS) ||
        (Tab[3]==CROSS && Tab[5]==CROSS && Tab[8]==CROSS) ||
        (Tab[0]==CROSS && Tab[4]==CROSS && Tab[8]==CROSS) ||
-       (Tab[6]==CROSS && Tab[5]==CROSS && Tab[2]==CROSS))
+       (Tab[6]==CROSS && Tab[4]==CROSS && Tab[2]==CROSS))
     {
         winner = CROSS;
     }
-
 
     return winner;
 }
@@ -58,6 +58,11 @@ int GameManager::getWinner()
     return winner;
 }
 
+int GameManager::getPlayer()
+{
+    return player;
+}
+
 void GameManager::receiveFromQml(int count)
 {
     if(Tab[count] == 0)
@@ -69,12 +74,17 @@ void GameManager::receiveFromQml(int count)
 
         if(checkGameStatus(count) == NOUGHT)
         {
-            qDebug() << winner + " WON !!!! ";
+            qDebug() << "Player" + QString::number(winner) + " WON !!!! ";
         }
 
         if(checkGameStatus(count) == CROSS)
         {
-            qDebug() << winner + " WON !!!! ";
+            qDebug() << "Player" + QString::number(winner) + " WON !!!! ";
+        }
+
+        if(winner != 0)
+        {
+            emit sendWinner(winner);
         }
 
         //switch players
@@ -89,6 +99,7 @@ void GameManager::receiveFromQml(int count)
             playerStr = "x.png";
         }
 
+        emit sendPlayer(player);
 
     }
     else

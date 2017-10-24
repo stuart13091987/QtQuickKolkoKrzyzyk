@@ -24,6 +24,7 @@ class GameManager : public QObject
 
     Q_PROPERTY(QString playerStr READ getPlayerStr)
     Q_PROPERTY(int winner READ getWinner)
+    Q_PROPERTY(int player READ getPlayer)
 
 
 public:
@@ -32,6 +33,7 @@ public:
     int checkGameStatus(int count);
     QString getPlayerStr();
     int getWinner();
+    int getPlayer();
 
 private:
     int Tab[SIZE*SIZE];
@@ -42,6 +44,8 @@ private:
 
 signals:
   void sendToQml(QString playerStr);
+  void sendWinner(int);
+  void sendPlayer(int);
 
 public slots:
   void receiveFromQml(int count);

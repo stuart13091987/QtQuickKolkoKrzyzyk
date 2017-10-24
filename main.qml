@@ -2,6 +2,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
+//T1T2
+
 ApplicationWindow {
     visible: true
     width: 420
@@ -9,17 +11,17 @@ ApplicationWindow {
     property alias mouseArea: mouseArea
     title: qsTr("KolkoKrzyzyk")
 
-
     SwipeView {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-
         Connections {
             target: manager
             onSendToQml: {
-                console.log("Received in QML from C++: " + count)
+                Item.aString = playerStr
+                console.log("Received in QML from C++: " + playerStr)
+                console.log("Manager.playerStr " + manager.playerStr)
             }
         }
 
@@ -47,14 +49,17 @@ ApplicationWindow {
                         id: mouseArea
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(1);
+                        onClicked: {
+                            manager.receiveFromQml(0);
+                            rectangle.color="blue"
+                            image1.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image1
                         width: 90
                         height: 90
-                        source: "x.png"
                     }
                 }
 
@@ -70,14 +75,17 @@ ApplicationWindow {
                         id: mouseArea1
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(2);
+                        onClicked: {
+                            manager.receiveFromQml(1);
+                            rectangle1.color="blue"
+                            image2.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image2
                         width: 90
                         height: 90
-                        source: "x.png"
                     }
                 }
 
@@ -93,19 +101,22 @@ ApplicationWindow {
                         id: mouseArea2
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(3);
+                        onClicked: {
+                            manager.receiveFromQml(2);
+                            rectangle2.color="blue"
+                            image3.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image3
                         width: 90
                         height: 90
-                        source: "x.png"
                     }
                 }
 
                 Rectangle {
-                    id: rectangle4
+                    id: rectangle3
                     x: 0
                     y: 200
                     width: 100
@@ -118,14 +129,43 @@ ApplicationWindow {
                         id: mouseArea3
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(4);
+                        onClicked: {
+                            manager.receiveFromQml(3);
+                            rectangle3.color="blue"
+                            image4.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image4
                         width: 90
                         height: 90
-                        source: "circle.jpg"
+                    }
+                }
+
+                Rectangle {
+                    id: rectangle4
+                    width: 100
+                    height: 100
+                    color: "#8ae234"
+                    border.color: "black"
+                    border.width: 5
+
+                    MouseArea {
+                        id: mouseArea4
+                        width: 100
+                        height: 100
+                        onClicked: {
+                            manager.receiveFromQml(4);
+                            rectangle4.color="blue"
+                            image5.source = manager.playerStr
+                        }
+                    }
+
+                    Image{
+                        id: image5
+                        width: 90
+                        height: 90
                     }
                 }
 
@@ -138,17 +178,20 @@ ApplicationWindow {
                     border.width: 5
 
                     MouseArea {
-                        id: mouseArea4
+                        id: mouseArea5
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(5);
+                        onClicked: {
+                            manager.receiveFromQml(5);
+                            rectangle5.color="blue"
+                            image6.source = manager.playerStr
+                        }
                     }
 
                     Image{
-                        id: image5
+                        id: image6
                         width: 90
                         height: 90
-                        source: "circle.jpg"
                     }
                 }
 
@@ -161,40 +204,20 @@ ApplicationWindow {
                     border.width: 5
 
                     MouseArea {
-                        id: mouseArea5
-                        width: 100
-                        height: 100
-                        onClicked: manager.receiveFromQml(6);
-                    }
-
-                    Image{
-                        id: image6
-                        width: 90
-                        height: 90
-                        source: "circle.jpg"
-                    }
-                }
-
-                Rectangle {
-                    id: rectangle3
-                    width: 100
-                    height: 100
-                    color: "#8ae234"
-                    border.color: "black"
-                    border.width: 5
-
-                    MouseArea {
                         id: mouseArea6
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(7);
+                        onClicked: {
+                            manager.receiveFromQml(6);
+                            rectangle6.color="blue"
+                            image7.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image7
                         width: 90
                         height: 90
-                        source: "o.png"
                     }
                 }
 
@@ -210,14 +233,17 @@ ApplicationWindow {
                         id: mouseArea7
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(8);
+                        onClicked: {
+                            manager.receiveFromQml(7);
+                            rectangle7.color="blue"
+                            image8.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image8
                         width: 90
                         height: 90
-                        source: "o.png"
                     }
                 }
 
@@ -233,14 +259,17 @@ ApplicationWindow {
                         id: mouseArea8
                         width: 100
                         height: 100
-                        onClicked: manager.receiveFromQml(9);
+                        onClicked: {
+                            manager.receiveFromQml(8);
+                            rectangle8.color="blue"
+                            image9.source = manager.playerStr
+                        }
                     }
 
                     Image{
                         id: image9
                         width: 90
                         height: 90
-                        source: "circle.jpg"
                     }
                 }
 

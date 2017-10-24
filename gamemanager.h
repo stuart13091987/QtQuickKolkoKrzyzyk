@@ -13,6 +13,7 @@
 #define EMPTY 0
 #define NOUGHT 1
 #define CROSS 2
+
 #define SIZE 3
 
 #include <QObject>
@@ -20,17 +21,28 @@
 class GameManager : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QString playerStr READ getPlayerStr)
+    Q_PROPERTY(int winner READ getWinner)
+
+
 public:
     explicit GameManager(QObject *parent = 0);
 
-    void setTab(int x, int y, int player);
+    int checkGameStatus(int count);
+    QString getPlayerStr();
+    int getWinner();
 
 private:
     int Tab[SIZE*SIZE];
+    int player;
+    int winner;
+    QString playerStr;
 
 
 signals:
-  void sendToQml(int count);
+  void sendToQml(QString playerStr);
+
 public slots:
   void receiveFromQml(int count);
 

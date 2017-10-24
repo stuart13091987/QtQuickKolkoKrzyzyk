@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    manager.sendToQml(43);
+    //manager.sendToQml(43);
 
     return app.exec();
 

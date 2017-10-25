@@ -10,12 +10,12 @@ GameManager::GameManager(QObject *parent) : QObject(parent)
     }
 
     //Nought starts
-    player = NOUGHT;
+    player = CROSS;
 
     winner = EMPTY;
 
     //image name for NOUGHT
-    playerStr = "o.png";
+    playerStr = "x.png";
 }
 
 int GameManager::checkGameStatus(int count)
@@ -63,48 +63,94 @@ int GameManager::getPlayer()
     return player;
 }
 
+void GameManager::newGame()
+{
+    //initialize array
+    for(int i = 0; i <SIZE*SIZE; i++)
+    {
+            Tab[i] = EMPTY;
+    }
+
+    //Nought starts
+    player = NOUGHT;
+
+    winner = EMPTY;
+
+    //image name for NOUGHT
+    playerStr = "o.png";
+
+    emit newGameSignal(NEWGAME);
+}
+
+int GameManager::getNewGame()
+{
+    return newGamex;
+}
+
 void GameManager::receiveFromQml(int count)
 {
-    if(Tab[count] == 0)
+    if(count == NEWGAME)
     {
-        Tab[count] = player;
-        qDebug() << "Received in C++ from QML:" << count << "Player" << player;
-
-        sendToQml(playerStr);
-
-        if(checkGameStatus(count) == NOUGHT)
+        //initialize array
+        for(int i = 0; i <SIZE*SIZE; i++)
         {
-            qDebug() << "Player" + QString::number(winner) + " WON !!!! ";
+                Tab[i] = EMPTY;
         }
 
-        if(checkGameStatus(count) == CROSS)
-        {
-            qDebug() << "Player" + QString::number(winner) + " WON !!!! ";
-        }
+        //Nought starts
+        player = NOUGHT;
 
-        if(winner != 0)
-        {
-            emit sendWinner(winner);
-        }
+        winner = EMPTY;
 
-        //switch players
-        if(player == CROSS)
-        {
-            player = NOUGHT;
-            playerStr = "o.png";
-        }
-        else
-        {
-            player = CROSS;
-            playerStr = "x.png";
-        }
-
-        emit sendPlayer(player);
+        //image name for NOUGHT
+        playerStr = "o.png";
 
     }
     else
     {
-        qDebug() << "This is selected already";
+        if(Tab[count] == 0)
+        {
+            Tab[count] = player;
+            qDebug() << "Received in C++ from QML:" << count << "Player" << player;
+
+            sendToQml(playerStr);
+
+            if(checkGameStatus(count) == NOUGHT)
+            {
+                qDebug() << "Player" + QString::number(winner) + " WON !!!! ";
+            }
+
+            if(checkGameStatus(count) == CROSS)
+            {
+                qDebug() << "Player" + QString::number(winner) + " WON !!!! ";
+            }
+
+            if(winner != 0)
+            {
+                emit sendWinner(winner);
+                newGame();
+                return;
+            }
+
+            //switch players
+            if(player == CROSS)
+            {
+                player = NOUGHT;
+                playerStr = "o.png";
+            }
+            else
+            {
+                player = CROSS;
+                playerStr = "x.png";
+            }
+
+            emit sendPlayer(player);
+
+        }
+        else
+        {
+            qDebug() << "This is selected already";
+        }
     }
 
 }

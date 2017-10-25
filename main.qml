@@ -42,6 +42,33 @@ ApplicationWindow {
             }
         }
 
+        Connections {
+            target: manager
+            onGetNewGame: {
+                console.log("New Game \n")
+                image1.source=""
+                image2.source=""
+                image3.source=""
+                image4.source=""
+                image5.source=""
+                image6.source=""
+                image7.source=""
+                image8.source=""
+                image9.source=""
+                rectangle.color="green"
+                rectangle1.color="green"
+                rectangle2.color="green"
+                rectangle3.color="green"
+                rectangle4.color="green"
+                rectangle5.color="green"
+                rectangle6.color="green"
+                rectangle7.color="green"
+                rectangle8.color="green"
+                manager.player = 1
+                manager.winner = 0
+            }
+        }
+
         Page {
             id:page1
 
@@ -334,6 +361,7 @@ ApplicationWindow {
                     rectangle8.color="green"
                     manager.player = 1
                     manager.winner = 0
+                    whoWon.text = ""
                 }
             }
         }

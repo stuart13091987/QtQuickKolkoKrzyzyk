@@ -10,12 +10,12 @@ GameManager::GameManager(QObject *parent) : QObject(parent)
     }
 
     //Nought starts
-    player = CROSS;
+    player = NOUGHT;
 
     winner = EMPTY;
 
     //image name for NOUGHT
-    playerStr = "x.png";
+    playerStr = "o.png";
 }
 
 int GameManager::checkGameStatus(int count)
@@ -26,7 +26,7 @@ int GameManager::checkGameStatus(int count)
        (Tab[6]==NOUGHT && Tab[7]==NOUGHT && Tab[8]==NOUGHT) ||
        (Tab[0]==NOUGHT && Tab[3]==NOUGHT && Tab[6]==NOUGHT) ||
        (Tab[1]==NOUGHT && Tab[4]==NOUGHT && Tab[7]==NOUGHT) ||
-       (Tab[3]==NOUGHT && Tab[5]==NOUGHT && Tab[8]==NOUGHT) ||
+       (Tab[2]==NOUGHT && Tab[5]==NOUGHT && Tab[8]==NOUGHT) ||
        (Tab[0]==NOUGHT && Tab[4]==NOUGHT && Tab[8]==NOUGHT) ||
        (Tab[6]==NOUGHT && Tab[4]==NOUGHT && Tab[2]==NOUGHT))
     {
@@ -38,7 +38,7 @@ int GameManager::checkGameStatus(int count)
        (Tab[6]==CROSS && Tab[7]==CROSS && Tab[8]==CROSS) ||
        (Tab[0]==CROSS && Tab[3]==CROSS && Tab[6]==CROSS) ||
        (Tab[1]==CROSS && Tab[4]==CROSS && Tab[7]==CROSS) ||
-       (Tab[3]==CROSS && Tab[5]==CROSS && Tab[8]==CROSS) ||
+       (Tab[2]==CROSS && Tab[5]==CROSS && Tab[8]==CROSS) ||
        (Tab[0]==CROSS && Tab[4]==CROSS && Tab[8]==CROSS) ||
        (Tab[6]==CROSS && Tab[4]==CROSS && Tab[2]==CROSS))
     {
@@ -85,6 +85,11 @@ void GameManager::newGame()
 int GameManager::getNewGame()
 {
     return newGamex;
+}
+
+void GameManager::setNewGame()
+{
+    newGamex=1;
 }
 
 void GameManager::receiveFromQml(int count)
